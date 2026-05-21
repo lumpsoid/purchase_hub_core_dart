@@ -10,6 +10,7 @@ PurchaseProduct _makeProduct({
   SubscriptionPeriod period = SubscriptionPeriod.monthly,
 }) => PurchaseProduct(
   id: id,
+  storeId: 'store_id',
   title: 'Pro Monthly',
   description: 'Full access',
   priceString: r'$9.99',

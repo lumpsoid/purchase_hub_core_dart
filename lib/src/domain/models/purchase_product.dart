@@ -8,6 +8,7 @@ import 'package:purchase_hub_core/src/domain/models/subscription_scope.dart';
 final class PurchaseProduct {
   const PurchaseProduct({
     required this.id,
+    required this.storeId,
     required this.title,
     required this.description,
     required this.priceString,
@@ -19,6 +20,7 @@ final class PurchaseProduct {
   });
 
   final String id;
+  final String storeId;
   final String title;
   final String description;
 
