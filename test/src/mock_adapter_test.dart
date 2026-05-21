@@ -130,11 +130,12 @@ void main() {
         adapter.subscriptionUpdates.listen(events.add);
 
         final result = await adapter.purchase(_productId);
+        final sub = result.subscription;
 
         expect(result.isNewPurchase, isTrue);
-        expect(result.subscription.isActive, isTrue);
-        expect(result.subscription.productId, _productId);
-        expect(result.subscription.period, SubscriptionPeriod.monthly);
+        expect(sub!.isActive, isTrue);
+        expect(sub.productId, _productId);
+        expect(sub.period, SubscriptionPeriod.monthly);
 
         await Future<void>.delayed(Duration.zero);
         expect(events.last.isActive, isTrue);
@@ -149,9 +150,10 @@ void main() {
           addTearDown(adapter.dispose);
 
           final result = await adapter.purchase('unknown_product');
+          final sub = result.subscription;
 
-          expect(result.subscription.isActive, isTrue);
-          expect(result.subscription.period, SubscriptionPeriod.monthly);
+          expect(sub!.isActive, isTrue);
+          expect(sub.period, SubscriptionPeriod.monthly);
         },
       );
 
@@ -223,7 +225,7 @@ void main() {
         addTearDown(adapter.dispose);
 
         final first = await adapter.purchase(_productId);
-        expect(first.subscription.isActive, isTrue);
+        expect(first.subscription!.isActive, isTrue);
 
         adapter.purchaseBehavior = MockPurchaseBehavior.cancel;
 
@@ -426,7 +428,7 @@ void main() {
         expect(sub.isActive, isFalse);
 
         final result = await adapter.purchase(_productId);
-        expect(result.subscription.isActive, isTrue);
+        expect(result.subscription!.isActive, isTrue);
       });
 
       test('unavailable — initialize throws NetworkFailure', () async {

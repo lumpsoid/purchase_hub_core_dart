@@ -30,7 +30,7 @@ void main() {
 
     test('purchase returns inactive PurchaseResult', () async {
       final result = await adapter.purchase('any_product');
-      expect(result.subscription.isActive, isFalse);
+      expect(result.subscription!.isActive, isFalse);
       expect(result.isNewPurchase, isFalse);
     });
 

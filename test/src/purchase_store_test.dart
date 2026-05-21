@@ -169,7 +169,7 @@ void main() {
         await store.initialize();
         final result = await store.purchase('pro_monthly');
 
-        expect(result.subscription.isActive, isTrue);
+        expect(result.subscription!.isActive, isTrue);
         expect(result.isNewPurchase, isTrue);
       });
 
