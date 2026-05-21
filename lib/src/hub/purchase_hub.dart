@@ -1,13 +1,12 @@
 import 'dart:async';
 
-
 import 'package:purchase_hub_core/src/domain/failures/purchase_failure.dart';
 import 'package:purchase_hub_core/src/domain/models/purchase_product.dart';
 import 'package:purchase_hub_core/src/domain/models/purchase_result.dart';
 import 'package:purchase_hub_core/src/domain/models/subscription.dart';
+import 'package:purchase_hub_core/src/hub/purchase_hub_config.dart';
 import 'package:purchase_hub_core/src/ports/purchase_adapter.dart';
 import 'package:purchase_hub_core/src/ports/purchase_initializer.dart';
-import 'package:purchase_hub_core/src/hub/purchase_hub_config.dart';
 
 /// The single entry-point for all purchase operations.
 ///
@@ -37,6 +36,30 @@ final class PurchaseHub {
 
   // Lifecycle
 
+  /// Broadcasts [Subscription] updates for the current user.
+  ///
+  /// Emits [Subscription.none] until a subscription is confirmed.
+  Stream<Subscription> get subscriptionUpdates =>
+      _subscriptionController.stream;
+
+  /// Release all resources. Call this when the app is being torn down.
+  Future<void> dispose() async {
+    await _adapterSub?.cancel();
+    await _adapter?.dispose();
+    await _subscriptionController.close();
+    _initialized = false;
+  }
+
+  // Streaming state
+
+  Future<List<PurchaseProduct>> getAvailableProducts() =>
+      _requireAdapter().getAvailableProducts();
+
+  // Queries
+
+  Future<Subscription> getCurrentSubscription() =>
+      _requireAdapter().getCurrentSubscription();
+
   /// Initialise the store.
   ///
   /// Safe to call multiple times — subsequent calls are no-ops.
@@ -64,30 +87,6 @@ final class PurchaseHub {
       }
     }
   }
-
-  /// Release all resources. Call this when the app is being torn down.
-  Future<void> dispose() async {
-    await _adapterSub?.cancel();
-    await _adapter?.dispose();
-    await _subscriptionController.close();
-    _initialized = false;
-  }
-
-  // Streaming state
-
-  /// Broadcasts [Subscription] updates for the current user.
-  ///
-  /// Emits [Subscription.none] until a subscription is confirmed.
-  Stream<Subscription> get subscriptionUpdates =>
-      _subscriptionController.stream;
-
-  // Queries
-
-  Future<Subscription> getCurrentSubscription() =>
-      _requireAdapter().getCurrentSubscription();
-
-  Future<List<PurchaseProduct>> getAvailableProducts() =>
-      _requireAdapter().getAvailableProducts();
 
   // Mutations
 

@@ -288,7 +288,11 @@ final class MockPurchaseAdapter implements PurchaseAdapter {
           willRenew: true,
           isTrial: false,
           purchasedAt: DateTime.now(),
-          expiresAt: _expiresAt(product?.period ?? SubscriptionPeriod.monthly),
+          expiresAt:
+              (product?.period == SubscriptionPeriod.unknown ||
+                  product?.period == SubscriptionPeriod.custom)
+              ? null
+              : _expiresAt(product?.period ?? SubscriptionPeriod.monthly),
         );
 
         _currentSubscription = next;
@@ -327,13 +331,16 @@ final class MockPurchaseAdapter implements PurchaseAdapter {
     if (delay > Duration.zero) await Future<void>.delayed(delay);
   }
 
-  static DateTime _expiresAt(SubscriptionPeriod period) =>
-      DateTime.now().add(switch (period) {
-        SubscriptionPeriod.weekly => const Duration(days: 7),
-        SubscriptionPeriod.monthly => const Duration(days: 30),
-        SubscriptionPeriod.quarterly => const Duration(days: 90),
-        SubscriptionPeriod.semiAnnual => const Duration(days: 180),
-        SubscriptionPeriod.annual => const Duration(days: 365),
-        SubscriptionPeriod.lifetime => const Duration(days: 36500),
-      });
+  static DateTime _expiresAt(SubscriptionPeriod period) => DateTime.now().add(
+    switch (period) {
+      SubscriptionPeriod.weekly => const Duration(days: 7),
+      SubscriptionPeriod.monthly => const Duration(days: 30),
+      SubscriptionPeriod.twoMonth => const Duration(days: 60),
+      SubscriptionPeriod.quarterly => const Duration(days: 90),
+      SubscriptionPeriod.semiAnnual => const Duration(days: 180),
+      SubscriptionPeriod.annual => const Duration(days: 365),
+      SubscriptionPeriod.lifetime => const Duration(days: 36500),
+      SubscriptionPeriod.unknown || SubscriptionPeriod.custom => Duration.zero,
+    },
+  );
 }

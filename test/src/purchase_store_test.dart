@@ -1,3 +1,6 @@
+// tests
+// ignore_for_file: prefer_const_constructors
+
 import 'package:purchase_hub_core/purchase_hub_core.dart';
 import 'package:test/test.dart';
 

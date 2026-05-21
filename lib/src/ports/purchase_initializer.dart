@@ -1,6 +1,6 @@
 import 'package:purchase_hub_core/purchase_hub_core.dart' show PurchaseHub;
-import 'package:purchase_hub_core/src/ports/purchase_adapter.dart';
 import 'package:purchase_hub_core/src/hub/purchase_hub.dart' show PurchaseHub;
+import 'package:purchase_hub_core/src/ports/purchase_adapter.dart';
 
 /// Factory contract for constructing a [PurchaseAdapter].
 ///

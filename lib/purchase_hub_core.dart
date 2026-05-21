@@ -15,9 +15,9 @@ export 'src/domain/models/subscription.dart';
 export 'src/domain/models/subscription_period.dart';
 export 'src/domain/models/subscription_scope.dart';
 export 'src/domain/models/subscription_status.dart';
-// Ports
-export 'src/ports/purchase_adapter.dart';
-export 'src/ports/purchase_initializer.dart';
 // Store facade
 export 'src/hub/purchase_hub.dart';
 export 'src/hub/purchase_hub_config.dart';
+// Ports
+export 'src/ports/purchase_adapter.dart';
+export 'src/ports/purchase_initializer.dart';
