@@ -347,4 +347,7 @@ final class MockPurchaseAdapter implements PurchaseAdapter {
       SubscriptionPeriod.unknown || SubscriptionPeriod.custom => Duration.zero,
     },
   );
+
+  @override
+  Future<void> syncPurchases() => Future.syncValue(null);
 }

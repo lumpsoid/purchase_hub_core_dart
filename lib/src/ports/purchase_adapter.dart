@@ -62,6 +62,9 @@ abstract interface class PurchaseAdapter {
   /// Throws [NoPurchasesToRestoreFailure] when nothing is found.
   Future<Subscription> restorePurchases();
 
+  /// Sync purchases
+  Future<void> syncPurchases();
+
   // Identity
 
   /// Associates a logged-in user with the store account.

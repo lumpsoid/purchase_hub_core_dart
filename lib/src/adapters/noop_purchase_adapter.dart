@@ -54,5 +54,8 @@ final class NoOpPurchaseAdapter implements PurchaseAdapter {
   Future<Subscription> restorePurchases() async => Subscription.none;
 
   @override
+  Future<void> syncPurchases() => Future.syncValue(null);
+
+  @override
   Future<void> setUserId(String? userId) async {}
 }

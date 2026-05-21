@@ -99,6 +99,8 @@ final class PurchaseHub {
   Future<Subscription> restorePurchases() =>
       _requireAdapter().restorePurchases();
 
+  Future<void> syncPurchases() => _requireAdapter().syncPurchases();
+
   // Identity
 
   Future<void> setUserId(String? userId) => _requireAdapter().setUserId(userId);
