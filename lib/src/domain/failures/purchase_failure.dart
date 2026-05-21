@@ -11,7 +11,7 @@ sealed class PurchaseFailure implements Exception {
   final String message;
 
   @override
-  String toString() => '$runtimeType: $message';
+  String toString() => 'PurchaseFailure: $message';
 }
 
 // User-initiated

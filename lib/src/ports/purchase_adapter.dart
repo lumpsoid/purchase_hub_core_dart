@@ -1,4 +1,5 @@
 import 'package:purchase_hub_core/src/domain/failures/purchase_failure.dart';
+import 'package:purchase_hub_core/src/domain/models/purchase_options.dart';
 import 'package:purchase_hub_core/src/domain/models/purchase_product.dart';
 import 'package:purchase_hub_core/src/domain/models/purchase_result.dart';
 import 'package:purchase_hub_core/src/domain/models/subscription.dart';
@@ -54,7 +55,7 @@ abstract interface class PurchaseAdapter {
   /// - [PurchaseCancelledFailure] — user dismissed the native sheet.
   /// - [AlreadySubscribedFailure] — product already owned.
   /// - [ProductNotFoundFailure] — [productId] not in the current offering.
-  Future<PurchaseResult> purchase(String productId);
+  Future<PurchaseResult> purchase(String productId, {PurchaseOptions? options});
 
   /// Restores prior purchases (required by App Store guidelines).
   ///

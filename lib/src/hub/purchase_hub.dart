@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:purchase_hub_core/src/domain/failures/purchase_failure.dart';
+import 'package:purchase_hub_core/src/domain/models/purchase_options.dart';
 import 'package:purchase_hub_core/src/domain/models/purchase_product.dart';
 import 'package:purchase_hub_core/src/domain/models/purchase_result.dart';
 import 'package:purchase_hub_core/src/domain/models/subscription.dart';
@@ -90,8 +91,10 @@ final class PurchaseHub {
 
   // Mutations
 
-  Future<PurchaseResult> purchase(String productId) =>
-      _requireAdapter().purchase(productId);
+  Future<PurchaseResult> purchase(
+    String productId, {
+    PurchaseOptions? options,
+  }) => _requireAdapter().purchase(productId, options: options);
 
   Future<Subscription> restorePurchases() =>
       _requireAdapter().restorePurchases();

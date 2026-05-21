@@ -1,6 +1,7 @@
+/// currently is not used in the package
+library;
+
 import 'package:meta/meta.dart';
-import 'package:purchase_hub_core/purchase_hub_core.dart' show PurchaseHub;
-import 'package:purchase_hub_core/src/hub/purchase_hub.dart' show PurchaseHub;
 
 /// The feature-set unlocked by a subscription.
 ///
@@ -10,9 +11,6 @@ final class SubscriptionScope {
   const SubscriptionScope(this.id);
 
   /// Derive a scope from a product identifier.
-  ///
-  /// Override this factory by registering a custom [ScopeMatcher] on
-  /// [PurchaseHub] if your product IDs follow a different naming scheme.
   factory SubscriptionScope.fromProductId(String productId) {
     final id = productId.toLowerCase();
     if (id.contains('premium')) return premium;

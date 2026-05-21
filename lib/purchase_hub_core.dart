@@ -9,7 +9,9 @@ export 'src/domain/failures/purchase_failure.dart';
 // Domain models
 export 'src/domain/models/entitlement.dart';
 export 'src/domain/models/introductory_offer.dart';
+export 'src/domain/models/purchase_options.dart';
 export 'src/domain/models/purchase_product.dart';
+export 'src/domain/models/purchase_replacement_mode.dart';
 export 'src/domain/models/purchase_result.dart';
 export 'src/domain/models/subscription.dart';
 export 'src/domain/models/subscription_period.dart';

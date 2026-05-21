@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:purchase_hub_core/src/domain/models/purchase_options.dart';
 import 'package:purchase_hub_core/src/domain/models/purchase_product.dart';
 import 'package:purchase_hub_core/src/domain/models/purchase_result.dart';
 import 'package:purchase_hub_core/src/domain/models/subscription.dart';
@@ -41,11 +42,13 @@ final class NoOpPurchaseAdapter implements PurchaseAdapter {
   Future<List<PurchaseProduct>> getAvailableProducts() async => const [];
 
   @override
-  Future<PurchaseResult> purchase(String productId) async =>
-      const PurchaseResult(
-        subscription: Subscription.none,
-        isNewPurchase: false,
-      );
+  Future<PurchaseResult> purchase(
+    String productId, {
+    PurchaseOptions? options,
+  }) async => const PurchaseResult(
+    subscription: Subscription.none,
+    isNewPurchase: false,
+  );
 
   @override
   Future<Subscription> restorePurchases() async => Subscription.none;

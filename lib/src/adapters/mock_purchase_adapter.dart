@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:meta/meta.dart';
 import 'package:purchase_hub_core/src/domain/failures/purchase_failure.dart';
+import 'package:purchase_hub_core/src/domain/models/purchase_options.dart';
 import 'package:purchase_hub_core/src/domain/models/purchase_product.dart';
 import 'package:purchase_hub_core/src/domain/models/purchase_result.dart';
 import 'package:purchase_hub_core/src/domain/models/subscription.dart';
@@ -256,7 +257,10 @@ final class MockPurchaseAdapter implements PurchaseAdapter {
   }
 
   @override
-  Future<PurchaseResult> purchase(String productId) async {
+  Future<PurchaseResult> purchase(
+    String productId, {
+    PurchaseOptions? options,
+  }) async {
     _calls.add(RecordedCall('purchase', argument: productId));
     await _simulateDelay(purchaseDelay);
 

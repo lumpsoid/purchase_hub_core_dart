@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
-import 'package:purchase_hub_core/purchase_hub_core.dart' show PurchaseHub, Subscription;
+import 'package:purchase_hub_core/purchase_hub_core.dart'
+    show PurchaseHub, Subscription;
 
 /// Tunable knobs for [PurchaseHub] behaviour.
 @immutable
@@ -20,6 +21,7 @@ final class PurchaseHubConfig {
   final bool emitNoneOnStartup;
 
   /// When `true`, [PurchaseHub.initialize] eagerly fetches
-  /// [getCurrentSubscription] and seeds [subscriptionUpdates].
+  /// [PurchaseHub.getCurrentSubscription] and seeds
+  /// [PurchaseHub.subscriptionUpdates].
   final bool autoFetchOnInitialize;
 }

@@ -2,7 +2,7 @@ name: purchase_hub_core
 description: >
   Store-agnostic purchase & subscription abstraction.
   Implement PurchaseAdapter to plug in any store backend.
-version: 0.1.3
+version: 0.1.4
 publish_to: none
 
 environment:
