@@ -4,6 +4,7 @@ import 'package:purchase_hub_core/src/domain/models/entitlement.dart';
 import 'package:purchase_hub_core/src/domain/models/subscription_period.dart';
 import 'package:purchase_hub_core/src/domain/models/subscription_scope.dart';
 import 'package:purchase_hub_core/src/domain/models/subscription_status.dart';
+import 'package:purchase_hub_core/src/domain/models/subscription_store.dart';
 
 /// The resolved subscription state for the current user.
 @immutable
@@ -15,6 +16,7 @@ final class Subscription {
     required this.scope,
     required this.willRenew,
     required this.isTrial,
+    this.store = SubscriptionStore.unknown,
     this.expiresAt,
     this.purchasedAt,
     this.entitlements,
@@ -26,6 +28,9 @@ final class Subscription {
   final SubscriptionScope scope;
   final bool willRenew;
   final bool isTrial;
+
+  /// The store / billing backend this subscription was purchased through.
+  final SubscriptionStore store;
   final DateTime? expiresAt;
   final DateTime? purchasedAt;
 
@@ -64,6 +69,7 @@ final class Subscription {
     SubscriptionScope? scope,
     bool? willRenew,
     bool? isTrial,
+    SubscriptionStore? store,
     DateTime? expiresAt,
     DateTime? purchasedAt,
     Entitlements? entitlements,
@@ -74,6 +80,7 @@ final class Subscription {
     scope: scope ?? this.scope,
     willRenew: willRenew ?? this.willRenew,
     isTrial: isTrial ?? this.isTrial,
+    store: store ?? this.store,
     expiresAt: expiresAt ?? this.expiresAt,
     purchasedAt: purchasedAt ?? this.purchasedAt,
     entitlements: entitlements ?? this.entitlements,
@@ -84,13 +91,14 @@ final class Subscription {
       other is Subscription &&
       other.productId == productId &&
       other.status == status &&
+      other.store == store &&
       other.expiresAt == expiresAt;
 
   @override
-  int get hashCode => Object.hash(productId, status, expiresAt);
+  int get hashCode => Object.hash(productId, status, store, expiresAt);
 
   @override
   String toString() =>
       'Subscription(productId: $productId, status: $status, '
-      'period: $period, scope: $scope, expiresAt: $expiresAt)';
+      'period: $period, scope: $scope, store: $store, expiresAt: $expiresAt)';
 }
